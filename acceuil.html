@@ -1,0 +1,46 @@
+<header id="head">
+    <div class="row center">
+        <div class="col s8 offset-s2">
+            <img class="responsive-img " src="assets\images\Pokemon-Logo.png" alt="Pokemon" style="width:500%; height:25em;">
+        </div>
+    </div>
+</header>
+
+<div class="row center">
+    <h5>
+        Welcome, you can search for Pokemon.
+        <br/> With an API from the site <a href="https://pokedevs.gitbook.io/">pokedevs</a> you can have the different Pokemon existing
+    </h5>
+</div>
+<br/> <br/>
+
+
+
+<div class="row">
+    <div class="input-field col s10 offset-s1">
+        <input placeholder="Lugia" id="name" type="text" class="autocomplete">
+        <label for="name">Name of Pokemon</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class='col s10 offset-s1'>
+        <div class='card blue lighten-5'>
+            <div class='card-content'>
+                <div class="row center">
+                    <h5>Research result</h5>
+                </div>
+                <br/><br/><br/>
+
+                <div class="row">
+                    <div id="result" class="col s10 offset-s1 white">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/pokemonSearch.js"></script>

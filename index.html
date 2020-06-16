@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head>
+
+    <title>Pokédex</title>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src='assets/js/jquery-3.2.1.min.js'></script>
+    <link rel="stylesheet" href="assets/css/materialize.min.css">
+    <script src="assets/js/materialize.min.js"></script>
+    <script src="assets/js/function.js"></script>
+</head>
+
+<body>
+
+    <div id="navbar">
+
+    </div>
+
+    <div id="page">
+
+    </div>
+
+    <div id="footer">
+
+    </div>
+
+
+    <script>
+        $("#navbar").load("include/navbar.html");
+
+        function switchPage(page) {
+            switch (page) {
+                case 'acceuil':
+                    $("#page").load("acceuil.html");
+                    break;
+
+                default:
+                    $("#page").load("acceuil.html");
+                    break;
+            }
+        }
+
+        //   $("#footer").load("include/footer.html");
+
+        switchPage('acceuil');
+    </script>
+</body>
+
+</html>
