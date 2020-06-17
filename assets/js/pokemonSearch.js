@@ -10,86 +10,35 @@ $('#name').keypress(function(e) {      
             $.get(
                 'https://pokeapi.co/api/v2/pokemon/' + $('#name').val().toLocaleLowerCase(),
                 function(data) {
+                    search = true;
                     data = JSON.parse(data);
                     var name = data['name'];
+                    var weight = data['weight'];
+                    var height = data['height'];
                     var types = data['types'];
                     var sprites = data['sprites'];
 
-                    var htmlData = "<div class='card'>";
-                    htmlData += "<div class='card-content'>";
-                    htmlData += "<span class='card-title center'>" + name + "</span>";
-                    htmlData += "<br/> <br/>";
-                    htmlData += "<div class='row center'>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "<i>Height</i> : " + data.height + " decimetres";
-                    htmlData += "</div>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "<i>Weight</i> : " + data.weight + " hectograms";
-                    htmlData += "</div>";
-                    htmlData += "</div>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='row'>";
-                    htmlData += "<i>Types</i> : <br/>";
-                    htmlData += "<div class='row center'>";
-
-                    types.forEach(element => {
-                        element = element['type'];
-                        element = getType(element['name']);
-                        //console.log(element);
-                    });
-
-                    htmlData += "<span class='new badge' style='background-color: #A8B820'>The Type</span>";
-                    htmlData += "<span class='new badge' style='background-color: #A8B820'>The Type</span>";
+                    $.post(
+                        'assets/js/pokemonSearch.php', {
+                            name: name,
+                            weight: weight,
+                            height: height,
+                            types: types,
+                            sprites: sprites,
+                        },
+                        function(html_result) {
+                            $("#result").html(html_result);
+                        },
+                        'html'
+                    );
 
 
-                    htmlData += "</div>";
-                    htmlData += "</div>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='row center'>";
-                    htmlData += "<div class='row'>";
-                    htmlData += "<i>Male</i>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "</div>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "</div>";
-                    htmlData += "</div>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='row'><i>Female</i>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "</div>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "</div>";
-                    htmlData += "</div>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='row'><i>Shiny Male</i>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "</div>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "</div>";
-                    htmlData += "</div>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='row'><i>Shiny Female</i>";
-                    htmlData += "<br/>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "</div>";
-                    htmlData += "<div class='col s6'>";
-                    htmlData += "</div>";
-                    htmlData += "</div>";
-                    htmlData += "<br/>";
-                    htmlData += "</div>";
-                    htmlData += "</div>";
-                    htmlData += "</div>";
 
-                    search = true;
-                    $("#result").html(htmlData);
                 },
                 'html'
             );
 
-            if (search === false) {
+            if (search == false) {
                 $("#result").html("");
                 M.toast({ html: 'Error ...' });
             }
@@ -128,18 +77,3 @@ $.get(
 $('#name').autocomplete({
     data: dataAuto,
 });
-
-
-
-$.get(
-    'https://pokeapi.co/api/v2/pokemon/bulbasaur',
-    function(data) {
-        var types = data['types'];
-
-        types.forEach(element => {
-            var theType = getType((new String(element.type.name)));
-            console.log(theType);
-        });
-    },
-    'html'
-);
